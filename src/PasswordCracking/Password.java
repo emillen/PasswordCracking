@@ -20,11 +20,6 @@ public class Password {
     }
 
 
-    private void parse(String string){
-
-
-    }
-
     String getSalt(){
         return salt;
     }
@@ -35,11 +30,11 @@ public class Password {
         return digestString;
     }
 
-    private String parseSurname(){
+    String getSurName(){
         return surname;
     }
 
-    private String parseLastName(){
+    String getLastName(){
 
         return lastname;
     }

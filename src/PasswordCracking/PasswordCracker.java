@@ -9,13 +9,34 @@ public class PasswordCracker {
 
     public static void main(String[] args){
 
-        Password pwd = new Password("tyler:<qt0.GlIrXuKs:503:503:Tyler Jones:/home/tyler:/bin/tcsh");
+        if(args.length != 1){
+            System.out.println("Usage: PasswordCracker <fileName>");
+            return;
+        }
+        String dict = "/home/daseel/cracker/dict.txt";
+        ArrayList<String> wordList;
+        ArrayList<Password> passwordList;
 
-        System.out.println(pwd.getSalt());
-        System.out.println(pwd.getDigestString());
+        try{
+            wordList = getWordList(dict);
+            passwordList = getPasswordList(args[0]);
+
+        } catch (Exception e){
+
+            System.out.println("File not found");
+            return;
+        }
     }
 
+    private static ArrayList<Password> getPasswordList(String fileName) throws FileNotFoundException{
 
+        ArrayList<String> stringList = getWordList(fileName);
+        ArrayList<Password> passwordList = new ArrayList<>();
+        for(String s : stringList)
+            passwordList.add(new Password(s));
+
+        return passwordList;
+    }
 
     private static ArrayList<String> getWordList(String fileName) throws FileNotFoundException {
 
