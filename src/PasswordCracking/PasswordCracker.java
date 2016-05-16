@@ -7,20 +7,15 @@ import java.util.Scanner;
 
 public class PasswordCracker {
 
+    public static void main(String[] args){
 
-    private static String getSalt(String string) {
+        Password pwd = new Password("tyler:<qt0.GlIrXuKs:503:503:Tyler Jones:/home/tyler:/bin/tcsh");
 
-        int index = string.indexOf(":") + 1;
-
-        return string.substring(index, index + 2);
+        System.out.println(pwd.getSalt());
+        System.out.println(pwd.getDigestString());
     }
 
-    private static String getDigestString(String string) {
 
-        int index = string.indexOf(":") + 3;
-
-        return string.substring(index, index + 11);
-    }
 
     private static ArrayList<String> getWordList(String fileName) throws FileNotFoundException {
 
