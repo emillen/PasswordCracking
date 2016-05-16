@@ -7,24 +7,39 @@ import java.util.Scanner;
 
 public class PasswordCracker {
 
+    public static void main(String[] args){
 
-    private static String getSalt(String string) {
+        if(args.length != 2){
+            System.out.println("Usage: PasswordCracker <passwordFileName> <dictionaryFileName>");
+            return;
+        }
+        ArrayList<String> wordList;
+        ArrayList<Password> passwordList;
 
-        int index = string.indexOf(":") + 1;
+        try{
+            wordList = getWordList(args[1]);
+            passwordList = getPasswordList(args[0]);
 
-        return string.substring(index, index + 2);
+        } catch (Exception e){
+
+            System.out.println("File not found");
+            return;
+        }
     }
 
-    private static String getDigestString(String string) {
+    private static ArrayList<Password> getPasswordList(String fileName) throws FileNotFoundException{
 
-        int index = string.indexOf(":") + 3;
+        ArrayList<String> stringList = getWordList(fileName);
+        ArrayList<Password> passwordList = new ArrayList<>();
+        for(String s : stringList)
+            passwordList.add(new Password(s));
 
-        return string.substring(index, index + 11);
+        return passwordList;
     }
 
     private static ArrayList<String> getWordList(String fileName) throws FileNotFoundException {
 
-        Scanner s = new Scanner(new File("filepath"));
+        Scanner s = new Scanner(new File(fileName));
         ArrayList<String> list = new ArrayList<>();
         while (s.hasNextLine()) {
             list.add(s.nextLine());
