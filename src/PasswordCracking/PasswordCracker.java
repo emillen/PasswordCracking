@@ -15,6 +15,13 @@ public class PasswordCracker {
         return string.substring(index, index + 2);
     }
 
+    private static String getDigestString(String string) {
+
+        int index = string.indexOf(":") + 3;
+
+        return string.substring(index, index + 11);
+    }
+
     private static ArrayList<String> getWordList(String fileName) throws FileNotFoundException {
 
         Scanner s = new Scanner(new File("filepath"));
