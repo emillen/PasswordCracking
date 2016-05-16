@@ -24,7 +24,7 @@ public class PasswordCracker {
 
     private static ArrayList<String> getWordList(String fileName) throws FileNotFoundException {
 
-        Scanner s = new Scanner(new File("filepath"));
+        Scanner s = new Scanner(new File(fileName));
         ArrayList<String> list = new ArrayList<>();
         while (s.hasNextLine()) {
             list.add(s.nextLine());
