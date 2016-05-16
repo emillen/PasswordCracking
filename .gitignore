@@ -1,0 +1,7 @@
+# Gradle:
+.idea/
+
+out/
+
+
+*iml
