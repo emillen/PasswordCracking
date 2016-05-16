@@ -9,16 +9,15 @@ public class PasswordCracker {
 
     public static void main(String[] args){
 
-        if(args.length != 1){
-            System.out.println("Usage: PasswordCracker <fileName>");
+        if(args.length != 2){
+            System.out.println("Usage: PasswordCracker <passwordFileName> <dictionaryFileName>");
             return;
         }
-        String dict = "/home/daseel/cracker/dict.txt";
         ArrayList<String> wordList;
         ArrayList<Password> passwordList;
 
         try{
-            wordList = getWordList(dict);
+            wordList = getWordList(args[1]);
             passwordList = getPasswordList(args[0]);
 
         } catch (Exception e){
