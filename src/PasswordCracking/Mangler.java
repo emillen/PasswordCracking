@@ -8,146 +8,127 @@ import java.util.ArrayList;
 
 class Mangler {
 
-    static ArrayList<String> deleteFirst(ArrayList<String> wordlist) {
+    static ArrayList<String> createMangleList(String s) {
 
-        ArrayList<String> delFirstList = new ArrayList<>();
+        ArrayList<String> mangleList = new ArrayList<>();
+        mangleList.add(deleteFirst(s));
+        mangleList.add(deleteLast(s));
 
-        for (String s : wordlist)
-            delFirstList.add(s.substring(1));
 
-        return delFirstList;
+        mangleList.add(reverse(s));
+        mangleList.add(duplicate(s));
+        mangleList.addAll(reflect(s));
+
+        mangleList.add(uppercase(s));
+        mangleList.add(lowerCase(s));
+        mangleList.add(nCapitalize(s));
+        mangleList.addAll(toggleCase(s));
+
+        mangleList.addAll(append(s));
+        mangleList.addAll(prepend(s));
+
+        return mangleList;
     }
 
-    static ArrayList<String> deleteLast(ArrayList<String> wordlist) {
+    static String deleteFirst(String s) {
 
-        ArrayList<String> delLastList = new ArrayList<>();
-
-        for (String s : wordlist)
-            delLastList.add(s.substring(0, s.length() - 1));
-
-        return delLastList;
-
+        return s.substring(1);
     }
 
-    static ArrayList<String> reverse(ArrayList<String> wordlist) {
+    static String deleteLast(String s) {
 
-        ArrayList<String> reverseList = new ArrayList<>();
-
-        for (String s : wordlist) {
-            reverseList.add(new StringBuilder(s).reverse().toString());
-        }
-
-        return reverseList;
+        return s.substring(0, s.length() - 1);
     }
 
-    static ArrayList<String> duplicate(ArrayList<String> wordlist) {
-        ArrayList<String> duplicateList = new ArrayList<>();
+    static String reverse(String s) {
 
-        for (String s : wordlist)
-            duplicateList.add(s + s);
 
-        return duplicateList;
+        return new StringBuilder(s).reverse().toString();
     }
 
-    static ArrayList<String> reflect(ArrayList<String> wordlist) {
+    static String duplicate(String s) {
+
+        return stripToEight(s + s);
+    }
+
+    static ArrayList<String> reflect(String s) {
 
         ArrayList<String> reflectList = new ArrayList<>();
 
-        for (String s : wordlist) {
+        String rev = new StringBuilder(s).reverse().toString();
 
-            String rev = new StringBuilder(s).reverse().toString();
+        reflectList.add(stripToEight(s + rev));
+        reflectList.add(stripToEight(rev + s));
 
-            reflectList.add(s + rev);
-            reflectList.add(rev + s);
-        }
         return reflectList;
     }
 
-    static ArrayList<String> uppercase(ArrayList<String> wordlist) {
-
-        ArrayList<String> uppercaseList = new ArrayList<>();
-
-        for (String s : wordlist)
-            uppercaseList.add(s.toUpperCase());
-
-        return uppercaseList;
+    static String uppercase(String s) {
+        return s.toUpperCase();
     }
 
-    static ArrayList<String> lowerCase(ArrayList<String> wordlist) {
-        ArrayList<String> lowercase = new ArrayList<>();
-
-        for (String s : wordlist)
-            lowercase.add(s.toLowerCase());
-
-        return lowercase;
+    static String lowerCase(String s) {
+        return s.toUpperCase();
     }
 
-    static ArrayList<String> nCapitalize(ArrayList<String> wordlist) {
+    static String nCapitalize(String s) {
 
-        ArrayList<String> nCapList = new ArrayList<>();
-
-        for (String s : wordlist) {
-
-            char first = Character.toLowerCase(s.charAt(0));
-            nCapList.add(first + s.substring(1).toUpperCase());
-        }
-
-        return nCapList;
+        char first = Character.toLowerCase(s.charAt(0));
+        return first + s.substring(1).toUpperCase();
     }
 
-    static ArrayList<String> toggleCase(ArrayList<String> wordlist) {
+    static ArrayList<String> toggleCase(String s) {
 
         ArrayList<String> toggleCaseList = new ArrayList<>();
 
-        for (String s : wordlist) {
-            s = s.toLowerCase();
-            StringBuilder toggled1 = new StringBuilder(s.length());
-            StringBuilder toggled2 = new StringBuilder(s.length());
-            for (int i = 0; i < s.length(); i++) {
-                char letter1, letter2;
-                letter1 = letter2 = s.charAt(i);
-                if (i % 2 == 0)
-                    letter1 = Character.toUpperCase(letter1);
-                else
-                    letter2 = Character.toUpperCase(letter2);
-                toggled1.append(letter1);
-                toggled2.append(letter2);
-            }
-
-            toggleCaseList.add(toggled1.toString());
-            toggleCaseList.add(toggled2.toString());
+        s = s.toLowerCase();
+        StringBuilder toggled1 = new StringBuilder(s.length());
+        StringBuilder toggled2 = new StringBuilder(s.length());
+        for (int i = 0; i < s.length(); i++) {
+            char letter1, letter2;
+            letter1 = letter2 = s.charAt(i);
+            if (i % 2 == 0)
+                letter1 = Character.toUpperCase(letter1);
+            else
+                letter2 = Character.toUpperCase(letter2);
+            toggled1.append(letter1);
+            toggled2.append(letter2);
         }
+
+        toggleCaseList.add(stripToEight(toggled1.toString()));
+        toggleCaseList.add(stripToEight(toggled2.toString()));
 
         return toggleCaseList;
     }
 
-    static ArrayList<String> prepend(ArrayList<String> worldlist) {
+    static ArrayList<String> prepend(String s) {
 
         ArrayList<String> prependList = new ArrayList<>();
 
         for (int i = 33; i <= 126; i++) {
-            for (String s : worldlist) {
-
-                prependList.add(Character.toChars(i)[0] + s);
-            }
-
+            prependList.add(stripToEight(Character.toChars(i)[0] + s));
         }
+
 
         return prependList;
     }
 
-    static ArrayList<String> append(ArrayList<String> worldlist) {
+    static ArrayList<String> append(String s) {
 
-        ArrayList<String> prependList = new ArrayList<>();
+        ArrayList<String> appendList = new ArrayList<>();
 
         for (int i = 33; i <= 126; i++) {
-            for (String s : worldlist) {
-
-                prependList.add(s + Character.toChars(i)[0]);
-            }
-
+            appendList.add(stripToEight(Character.toChars(i)[0] + s));
         }
 
-        return prependList;
+
+        return appendList;
+    }
+
+    private static String stripToEight(String s) {
+
+        if (s.length() > 8)
+            return s.substring(0, 8);
+        return s;
     }
 }
