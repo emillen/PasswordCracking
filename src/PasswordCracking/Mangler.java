@@ -5,22 +5,10 @@ import java.util.ArrayList;
 /**
  * Created by daseel on 2016-05-16.
  */
-public class Mangler {
 
-    static ArrayList<String> singleMangledList(ArrayList<String> dict) {
+class Mangler {
 
-        // Not implemented since it might be too slow
-
-        return null;
-    }
-
-    static ArrayList<String> doubleMangledList(ArrayList<String> dict) {
-
-        // Not implemented since it might be too slow
-        return singleMangledList(singleMangledList(dict));
-    }
-
-    private static ArrayList<String> deleteFirst(ArrayList<String> wordlist) {
+    static ArrayList<String> deleteFirst(ArrayList<String> wordlist) {
 
         ArrayList<String> delFirstList = new ArrayList<>();
 
@@ -30,7 +18,7 @@ public class Mangler {
         return delFirstList;
     }
 
-    private static ArrayList<String> deleteLast(ArrayList<String> wordlist) {
+    static ArrayList<String> deleteLast(ArrayList<String> wordlist) {
 
         ArrayList<String> delLastList = new ArrayList<>();
 
@@ -41,7 +29,7 @@ public class Mangler {
 
     }
 
-    private static ArrayList<String> reverse(ArrayList<String> wordlist) {
+    static ArrayList<String> reverse(ArrayList<String> wordlist) {
 
         ArrayList<String> reverseList = new ArrayList<>();
 
@@ -52,7 +40,7 @@ public class Mangler {
         return reverseList;
     }
 
-    private static ArrayList<String> duplicate(ArrayList<String> wordlist) {
+    static ArrayList<String> duplicate(ArrayList<String> wordlist) {
         ArrayList<String> duplicateList = new ArrayList<>();
 
         for (String s : wordlist)
@@ -61,7 +49,7 @@ public class Mangler {
         return duplicateList;
     }
 
-    private static ArrayList<String> reflect(ArrayList<String> wordlist) {
+    static ArrayList<String> reflect(ArrayList<String> wordlist) {
 
         ArrayList<String> reflectList = new ArrayList<>();
 
@@ -75,7 +63,7 @@ public class Mangler {
         return reflectList;
     }
 
-    private static ArrayList<String> uppercase(ArrayList<String> wordlist) {
+    static ArrayList<String> uppercase(ArrayList<String> wordlist) {
 
         ArrayList<String> uppercaseList = new ArrayList<>();
 
@@ -85,7 +73,7 @@ public class Mangler {
         return uppercaseList;
     }
 
-    private static ArrayList<String> lowerCase(ArrayList<String> wordlist) {
+    static ArrayList<String> lowerCase(ArrayList<String> wordlist) {
         ArrayList<String> lowercase = new ArrayList<>();
 
         for (String s : wordlist)
@@ -94,7 +82,7 @@ public class Mangler {
         return lowercase;
     }
 
-    private static ArrayList<String> nCapitalize(ArrayList<String> wordlist) {
+    static ArrayList<String> nCapitalize(ArrayList<String> wordlist) {
 
         ArrayList<String> nCapList = new ArrayList<>();
 
@@ -107,7 +95,7 @@ public class Mangler {
         return nCapList;
     }
 
-    private static ArrayList<String> toggleCase(ArrayList<String> wordlist) {
+    static ArrayList<String> toggleCase(ArrayList<String> wordlist) {
 
         ArrayList<String> toggleCaseList = new ArrayList<>();
 
@@ -133,14 +121,14 @@ public class Mangler {
         return toggleCaseList;
     }
 
-    private static ArrayList<String> prepend(ArrayList<String> worldlist){
+    static ArrayList<String> prepend(ArrayList<String> worldlist) {
 
         ArrayList<String> prependList = new ArrayList<>();
 
-        for(int i = 33; i <= 126; i++){
-            for(String s : worldlist){
+        for (int i = 33; i <= 126; i++) {
+            for (String s : worldlist) {
 
-                prependList.add(Character.toChars(i)[0] +  s);
+                prependList.add(Character.toChars(i)[0] + s);
             }
 
         }
@@ -148,12 +136,12 @@ public class Mangler {
         return prependList;
     }
 
-    private static ArrayList<String> append(ArrayList<String> worldlist){
+    static ArrayList<String> append(ArrayList<String> worldlist) {
 
         ArrayList<String> prependList = new ArrayList<>();
 
-        for(int i = 33; i <= 126; i++){
-            for(String s : worldlist){
+        for (int i = 33; i <= 126; i++) {
+            for (String s : worldlist) {
 
                 prependList.add(s + Character.toChars(i)[0]);
             }
