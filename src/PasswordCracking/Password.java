@@ -1,6 +1,5 @@
 package PasswordCracking;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -33,7 +32,7 @@ public class Password {
         return digestString;
     }
 
-    ArrayList<String> getGCOS(){
+    ArrayList<String> getGCOS() {
 
         return GCOS;
     }
