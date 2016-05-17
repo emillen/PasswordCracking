@@ -7,31 +7,31 @@ import java.util.Scanner;
 
 public class PasswordCracker {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-        if(args.length != 2){
+        if (args.length != 2) {
             System.out.println("Usage: PasswordCracker <passwordFileName> <dictionaryFileName>");
             return;
         }
         ArrayList<String> wordList;
         ArrayList<Password> passwordList;
 
-        try{
+        try {
             wordList = getWordList(args[1]);
             passwordList = getPasswordList(args[0]);
 
-        } catch (Exception e){
+        } catch (Exception e) {
 
             System.out.println("File not found");
             return;
         }
     }
 
-    private static ArrayList<Password> getPasswordList(String fileName) throws FileNotFoundException{
+    private static ArrayList<Password> getPasswordList(String fileName) throws FileNotFoundException {
 
         ArrayList<String> stringList = getWordList(fileName);
         ArrayList<Password> passwordList = new ArrayList<>();
-        for(String s : stringList)
+        for (String s : stringList)
             passwordList.add(new Password(s));
 
         return passwordList;
