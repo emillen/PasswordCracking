@@ -14,9 +14,11 @@ public class Password {
 
         String[] strings = passWordFileEntry.split(":");
         salt = strings[1].substring(0, 2);
-        digestString = strings[1].substring(2);
+        digestString = strings[1];
         surname = strings[4].split(" ")[0];
         lastname = strings[4].split(" ")[1];
+
+
     }
 
 
