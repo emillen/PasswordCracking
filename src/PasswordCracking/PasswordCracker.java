@@ -9,8 +9,8 @@ public class PasswordCracker {
 
     public static void main(String[] args) {
 
-        /*if (args.length != 2) {
-            System.out.println("Usage: PasswordCracker <passwordFileName> <dictionaryFileName>");
+        /*if (args.length != 1) {
+            System.out.println("Usage: PasswordCracker <passwordFileName>");
             return;
         }*/
 
@@ -31,36 +31,40 @@ public class PasswordCracker {
 
 
         addGCOS(passwordList, wordList);
-        System.out.println("Creating le mangles\n");
-        getMangles(wordList);
-        System.out.println("Done with le mangles\n");
-        hackPasswordsBreh(passwordList, wordList);
+        System.out.println("First round!  Passwords left: " + passwordList.size() + "  words to try: " + wordList.size());
+        passwordList = hackPasswordsBreh(passwordList, wordList);
+
+        System.out.println("Second round!  Passwords left: " + passwordList.size() + "  words to try: " + wordList.size());
+        wordList = getMangles(wordList);
+        passwordList = hackPasswordsBreh(passwordList, wordList);
+
+        System.out.println("Third round!  Passwords left: " + passwordList.size() + "  words to try: " + wordList.size());
+        wordList = getMangles(wordList);
+        passwordList = hackPasswordsBreh(passwordList, wordList);
+
     }
 
-    private static void getMangles(ArrayList<String> words){
+    private static ArrayList<String> getMangles(ArrayList<String> words) {
 
         ArrayList<String> mangles = new ArrayList<>();
-        for(String s : words)
+        for (String s : words)
             mangles.addAll(Mangler.createMangleList(s));
 
-        words.addAll(mangles);
-
-        for(String s : mangles)
-            words.addAll(Mangler.createMangleList(s));
+        return mangles;
     }
 
-    private static void addGCOS(ArrayList<Password> passwords, ArrayList<String> words){
+    private static void addGCOS(ArrayList<Password> passwords, ArrayList<String> words) {
 
-        for(Password pass : passwords)
+        for (Password pass : passwords)
             words.addAll(pass.getGCOS());
     }
 
-    private static void hackPasswordsBreh(ArrayList<Password> passwords, ArrayList<String> words){
+    private static ArrayList<Password> hackPasswordsBreh(ArrayList<Password> passwords, ArrayList<String> words) {
 
-        for(String s : words){
+        for (String s : words) {
             ArrayList<Password> failed = new ArrayList<>();
-            for(Password pass : passwords){
-                if(isPassphrase(pass, s)){
+            for (Password pass : passwords) {
+                if (isPassphrase(pass, s)) {
                     System.out.println(s);
                     continue;
                 }
@@ -70,6 +74,9 @@ public class PasswordCracker {
 
             passwords = failed;
         }
+
+        return passwords;
+
     }
 
     private static boolean isPassphrase(Password pass, String passphrase) {
