@@ -26,8 +26,10 @@ class Mangler {
         mangleList.add(nCapitalize(s));
         mangleList.addAll(toggleCase(s));
 
-        mangleList.addAll(append(s));
-        mangleList.addAll(prepend(s));
+
+
+        //mangleList.addAll(append(s));
+        //mangleList.addAll(prepend(s));
 
         mangleList.add(s);
 
