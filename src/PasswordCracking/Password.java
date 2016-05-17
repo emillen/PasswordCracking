@@ -1,5 +1,9 @@
 package PasswordCracking;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by daseel on 2016-05-16.
  */
@@ -7,17 +11,14 @@ public class Password {
 
     private String salt;
     private String digestString;
-    private String surname;
-    private String lastname;
+    private ArrayList<String> GCOS;
 
     Password(String passWordFileEntry) {
 
         String[] strings = passWordFileEntry.split(":");
         salt = strings[1].substring(0, 2);
         digestString = strings[1];
-        surname = strings[4].split(" ")[0];
-        lastname = strings[4].split(" ")[1];
-
+        GCOS = new ArrayList<String>(Arrays.asList(strings[4].split(" ")));
 
     }
 
@@ -32,12 +33,8 @@ public class Password {
         return digestString;
     }
 
-    String getSurName() {
-        return surname;
-    }
+    ArrayList<String> getGCOS(){
 
-    String getLastName() {
-
-        return lastname;
+        return GCOS;
     }
 }
