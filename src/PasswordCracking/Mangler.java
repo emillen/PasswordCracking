@@ -21,11 +21,15 @@ class Mangler {
 
         mangleList.add(uppercase(s));
         mangleList.add(lowerCase(s));
+
+        mangleList.add(capitalize(s));
         mangleList.add(nCapitalize(s));
         mangleList.addAll(toggleCase(s));
 
         mangleList.addAll(append(s));
         mangleList.addAll(prepend(s));
+
+        mangleList.add(s);
 
         return mangleList;
     }
@@ -71,9 +75,14 @@ class Mangler {
         return s.toUpperCase();
     }
 
+    static String capitalize(String s){
+        char first = Character.toUpperCase(s.charAt(0));
+        return first + s.substring(1);
+    }
+
     static String nCapitalize(String s) {
 
-        char first = Character.toLowerCase(s.charAt(0));
+        char first = s.charAt(0);
         return first + s.substring(1).toUpperCase();
     }
 
@@ -81,7 +90,6 @@ class Mangler {
 
         ArrayList<String> toggleCaseList = new ArrayList<>();
 
-        s = s.toLowerCase();
         StringBuilder toggled1 = new StringBuilder(s.length());
         StringBuilder toggled2 = new StringBuilder(s.length());
         for (int i = 0; i < s.length(); i++) {
@@ -95,8 +103,8 @@ class Mangler {
             toggled2.append(letter2);
         }
 
-        toggleCaseList.add(stripToEight(toggled1.toString()));
-        toggleCaseList.add(stripToEight(toggled2.toString()));
+        toggleCaseList.add(toggled1.toString());
+        toggleCaseList.add(toggled2.toString());
 
         return toggleCaseList;
     }
@@ -105,8 +113,13 @@ class Mangler {
 
         ArrayList<String> prependList = new ArrayList<>();
 
+        if (s.length() >= 8) {
+            prependList.add(s);
+            return prependList;
+        }
+
         for (int i = 33; i <= 126; i++) {
-            prependList.add(stripToEight(Character.toChars(i)[0] + s));
+            prependList.add(Character.toChars(i)[0] + s);
         }
 
 
@@ -117,8 +130,13 @@ class Mangler {
 
         ArrayList<String> appendList = new ArrayList<>();
 
+        if (s.length() >= 8) {
+            appendList.add(s);
+            return appendList;
+        }
+
         for (int i = 33; i <= 126; i++) {
-            appendList.add(stripToEight(Character.toChars(i)[0] + s));
+            appendList.add(Character.toChars(i)[0] + s);
         }
 
 

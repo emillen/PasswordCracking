@@ -17,7 +17,7 @@ public class Password {
         String[] strings = passWordFileEntry.split(":");
         salt = strings[1].substring(0, 2);
         digestString = strings[1];
-        GCOS = new ArrayList<String>(Arrays.asList(strings[4].split(" ")));
+        GCOS = new ArrayList<String>(Arrays.asList(strings[4].toLowerCase().split(" ")));
 
     }
 
